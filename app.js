@@ -144,6 +144,12 @@ function showToast(message) {
   showToast.timer = setTimeout(() => els.toast.classList.remove("show"), 2400);
 }
 
+function todayString() {
+  const now = new Date();
+  const offset = now.getTimezoneOffset() * 60000;
+  return new Date(now.getTime() - offset).toISOString().slice(0, 10);
+}
+
 document.addEventListener("click", (event) => {
   const target = event.target.closest("button");
   if (!target) return;
@@ -161,6 +167,9 @@ els.cartToggle.addEventListener("click", () => {
     return;
   }
   els.cartDrawer.hidden = false;
+  if (!els.orderForm.elements.mealDate.value) {
+    els.orderForm.elements.mealDate.value = todayString();
+  }
   setTimeout(() => els.orderForm.elements.roomNo.focus(), 50);
 });
 
@@ -191,7 +200,8 @@ els.orderForm.addEventListener("submit", async (event) => {
     createdAt: Date.now(),
     name: data.name,
     roomNo: data.roomNo,
-    phone: data.phone,
+    mealDate: data.mealDate,
+    mealPeriod: data.mealPeriod,
     people: Number(data.people || 0),
     note: data.note,
     items: orderItems,

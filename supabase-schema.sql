@@ -25,13 +25,23 @@ create table if not exists public.orders (
   "createdAt" bigint not null,
   name text not null,
   "roomNo" text not null,
-  phone text not null,
+  phone text not null default '',
+  "mealDate" text not null default '',
+  "mealPeriod" text not null default '',
   people integer not null,
   note text not null default '',
   items jsonb not null,
   total numeric not null default 0,
   created_at timestamptz not null default now()
 );
+
+alter table public.orders
+  alter column phone drop not null,
+  alter column phone set default '';
+
+alter table public.orders
+  add column if not exists "mealDate" text not null default '',
+  add column if not exists "mealPeriod" text not null default '';
 
 alter table public.categories enable row level security;
 alter table public.dishes enable row level security;

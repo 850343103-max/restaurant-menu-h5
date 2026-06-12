@@ -3,7 +3,8 @@ const { getAdminData, getPublicData, readJson, requireAdmin, sendJson, supabaseF
 function validateOrder(order) {
   if (!order.name) return "请填写姓名";
   if (!order.roomNo) return "请填写桌号/包房";
-  if (!order.phone) return "请填写电话";
+  if (!order.mealDate) return "请选择日期";
+  if (!order.mealPeriod) return "请选择中午或晚上";
   if (!Number(order.people)) return "请填写人数";
   if (!Array.isArray(order.items) || !order.items.length) return "请选择菜品";
   return "";

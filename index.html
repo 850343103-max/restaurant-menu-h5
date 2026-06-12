@@ -19,7 +19,7 @@
     <main id="customerView">
       <section class="notice">
         <strong>夏季时令菜单</strong>
-        <span>客人只需选择菜品和数量，填写桌号/包房、姓名、电话、人数和备注后提交。</span>
+        <span>客人只需选择菜品和数量，填写房号/包房、姓名、日期、午晚餐和备注后提交。</span>
       </section>
 
       <nav class="category-tabs" id="categoryTabs" aria-label="菜品分类"></nav>
@@ -47,14 +47,21 @@
           </div>
           <div class="form-grid">
             <label>
-              电话
-              <input name="phone" type="tel" autocomplete="tel" required placeholder="手机号">
+              日期
+              <input name="mealDate" type="date" required>
             </label>
             <label>
-              人数
-              <input name="people" type="number" min="1" step="1" required placeholder="例如 6">
+              餐段
+              <select name="mealPeriod" required>
+                <option value="中午">中午</option>
+                <option value="晚上">晚上</option>
+              </select>
             </label>
           </div>
+          <label>
+            人数
+            <input name="people" type="number" min="1" step="1" required placeholder="例如 6">
+          </label>
           <label>
             备注
             <textarea name="note" rows="3" placeholder="口味、忌口、加急等"></textarea>

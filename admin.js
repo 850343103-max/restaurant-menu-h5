@@ -100,7 +100,8 @@ function formatOrder(order) {
     "【粤菜王府点菜单】",
     `姓名：${order.name}`,
     `桌号/包房：${order.roomNo || order.tableNo || "-"}`,
-    `电话：${order.phone || "-"}`,
+    `日期：${order.mealDate || "-"}`,
+    `餐段：${order.mealPeriod || "-"}`,
     `人数：${order.people || "-"}`,
     order.note ? `备注：${order.note}` : "",
     `时间：${new Date(order.createdAt).toLocaleString()}`,
@@ -142,7 +143,7 @@ function renderOrders() {
         <h3>${order.roomNo || "-"} · ${order.name}</h3>
         <strong>${money(order.total)}</strong>
       </div>
-      <p class="order-meta">${new Date(order.createdAt).toLocaleString()} · ${order.phone || "-"} · ${order.people || "-"}人${order.note ? ` · ${order.note}` : ""}</p>
+      <p class="order-meta">${order.mealDate || "-"} · ${order.mealPeriod || "-"} · ${order.people || "-"}人 · ${new Date(order.createdAt).toLocaleString()}${order.note ? ` · ${order.note}` : ""}</p>
       ${renderOrderGroups(order)}
       <div class="order-actions">
         <button class="primary-btn" data-copy-order="${order.id}" type="button">复制订单</button>
