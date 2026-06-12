@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>粤菜王府后台管理</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DRAGON COURT</p>
+        <h1>粤菜王府</h1>
+        <p class="subline">后台管理</p>
+      </div>
+      <a class="admin-entry" href="/">前台</a>
+    </header>
+
+    <section class="login-panel" id="loginPanel">
+      <p class="eyebrow">ADMIN</p>
+      <h2>管理员登录</h2>
+      <form class="manage-form" id="loginForm">
+        <label>账号<input name="username" required autocomplete="username" placeholder="admin"></label>
+        <label>密码<input name="password" required type="password" autocomplete="current-password" placeholder="请输入密码"></label>
+        <button class="primary-btn" type="submit">登录后台</button>
+      </form>
+    </section>
+
+    <section class="admin-view standalone-admin" id="adminView" hidden>
+      <div class="admin-head">
+        <div>
+          <p class="eyebrow">MANAGE</p>
+          <h2>后台管理</h2>
+        </div>
+        <button class="admin-entry" id="logoutBtn" type="button">退出登录</button>
+      </div>
+
+      <div class="admin-tabs" role="tablist">
+        <button class="active" data-admin-tab="orders" type="button">订单</button>
+        <button data-admin-tab="dishes" type="button">菜品</button>
+        <button data-admin-tab="categories" type="button">分类</button>
+      </div>
+
+      <section id="ordersPanel" class="admin-panel"></section>
+
+      <section id="dishesPanel" class="admin-panel" hidden>
+        <form class="manage-form" id="dishForm">
+          <input type="hidden" name="id">
+          <label>菜名<input name="name" required placeholder="例：烧椒溏心皮蛋"></label>
+          <label>价格<input name="price" type="number" min="0" step="1" required placeholder="38"></label>
+          <label>分类<select name="categoryId" required></select></label>
+          <div class="upload-field">
+            <span class="field-label">图片上传</span>
+            <input type="hidden" name="image">
+            <input class="file-input" id="dishImageFile" type="file" accept="image/jpeg,image/png,image/webp">
+            <label class="upload-dropzone" id="dishImageDropzone" for="dishImageFile">
+              <span>点击选择图片，或拖拽图片到这里</span>
+              <small>支持 jpg、png、webp，单张不超过 5MB</small>
+            </label>
+            <div class="image-preview" id="dishImagePreview" hidden>
+              <img alt="菜品图片预览">
+              <button class="ghost-btn danger-btn" id="removeDishImage" type="button">删除图片</button>
+            </div>
+          </div>
+          <label>描述<input name="desc" placeholder="例：￥38/碟"></label>
+          <label class="check-line"><input name="soldOut" type="checkbox"> 售罄</label>
+          <button class="primary-btn" type="submit">保存菜品</button>
+          <button class="ghost-btn" id="resetDishForm" type="button">新增模式</button>
+        </form>
+        <div class="manage-list" id="dishManageList"></div>
+      </section>
+
+      <section id="categoriesPanel" class="admin-panel" hidden>
+        <form class="manage-form compact" id="categoryForm">
+          <input name="name" required placeholder="新增分类名称">
+          <button class="primary-btn" type="submit">添加分类</button>
+        </form>
+        <div class="manage-list" id="categoryManageList"></div>
+      </section>
+    </section>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

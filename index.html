@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>粤菜王府扫码点菜</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">DRAGON COURT</p>
+        <h1>粤菜王府</h1>
+        <p class="subline">扫码点菜 · 后台接单</p>
+      </div>
+      <a class="admin-entry" href="/admin.html">后台</a>
+    </header>
+
+    <main id="customerView">
+      <section class="notice">
+        <strong>夏季时令菜单</strong>
+        <span>客人只需选择菜品和数量，填写桌号/包房、姓名、电话、人数和备注后提交。</span>
+      </section>
+
+      <nav class="category-tabs" id="categoryTabs" aria-label="菜品分类"></nav>
+      <section class="dish-list" id="dishList" aria-live="polite"></section>
+    </main>
+
+    <aside class="cart-panel" id="cartPanel">
+      <div class="cart-drawer" id="cartDrawer" hidden>
+        <div class="drawer-head">
+          <h2>提交订单</h2>
+          <button class="ghost-btn" id="clearCart" type="button">清空</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+
+        <form class="order-form" id="orderForm">
+          <div class="form-grid">
+            <label>
+              桌号/包房
+              <input name="roomNo" autocomplete="off" required placeholder="例如 V222">
+            </label>
+            <label>
+              姓名
+              <input name="name" autocomplete="name" required placeholder="客人姓名">
+            </label>
+          </div>
+          <div class="form-grid">
+            <label>
+              电话
+              <input name="phone" type="tel" autocomplete="tel" required placeholder="手机号">
+            </label>
+            <label>
+              人数
+              <input name="people" type="number" min="1" step="1" required placeholder="例如 6">
+            </label>
+          </div>
+          <label>
+            备注
+            <textarea name="note" rows="3" placeholder="口味、忌口、加急等"></textarea>
+          </label>
+          <button class="primary-btn" type="submit">确认提交订单</button>
+        </form>
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-summary">
+          <span>已选 <b id="cartCount">0</b> 份</span>
+          <strong id="cartTotal">￥0</strong>
+        </div>
+        <button class="submit-order-btn" id="cartToggle" type="button">
+          <span id="cartActionText">提交订单</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
