@@ -172,6 +172,10 @@ h3 { margin-bottom: 6px; font-size: 17px; }
   pointer-events: auto;
 }
 
+.cart-panel.drawer-open .cart-footer {
+  display: none;
+}
+
 .cart-summary {
   flex: 1;
   min-width: 0;
@@ -404,4 +408,49 @@ input, textarea, select {
   .dish-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cart-panel { width: min(100%, 980px); padding-inline: 24px; }
   .admin-view { margin-inline: -24px; padding-inline: 24px; }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 14px 10px 96px;
+  }
+
+  .topbar {
+    padding-inline: 2px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .dish-card {
+    grid-template-columns: 86px 1fr;
+    gap: 10px;
+  }
+
+  .dish-img {
+    width: 86px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-panel {
+    padding: 8px 10px max(8px, env(safe-area-inset-bottom));
+  }
+
+  .cart-drawer {
+    max-height: 82vh;
+    padding: 12px;
+  }
+
+  .cart-summary {
+    padding: 12px;
+  }
+
+  .submit-order-btn {
+    flex-basis: 112px;
+    padding-inline: 10px;
+  }
 }

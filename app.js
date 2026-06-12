@@ -144,6 +144,11 @@ function showToast(message) {
   showToast.timer = setTimeout(() => els.toast.classList.remove("show"), 2400);
 }
 
+function setCartDrawer(open) {
+  els.cartDrawer.hidden = !open;
+  document.querySelector("#cartPanel").classList.toggle("drawer-open", open);
+}
+
 function todayString() {
   const now = new Date();
   const offset = now.getTimezoneOffset() * 60000;
@@ -166,7 +171,7 @@ els.cartToggle.addEventListener("click", () => {
     showToast("请先选择菜品。");
     return;
   }
-  els.cartDrawer.hidden = false;
+  setCartDrawer(true);
   if (!els.orderForm.elements.mealDate.value) {
     els.orderForm.elements.mealDate.value = todayString();
   }
@@ -175,7 +180,7 @@ els.cartToggle.addEventListener("click", () => {
 
 els.clearCart.addEventListener("click", () => {
   cart = {};
-  els.cartDrawer.hidden = true;
+  setCartDrawer(false);
   renderAll();
 });
 
@@ -211,7 +216,7 @@ els.orderForm.addEventListener("submit", async (event) => {
     state = await api("/api/orders", { method: "POST", body: JSON.stringify(order) });
     cart = {};
     els.orderForm.reset();
-    els.cartDrawer.hidden = true;
+    setCartDrawer(false);
     renderAll();
     showToast("订单已提交，后台已生成。");
   } catch (error) {
