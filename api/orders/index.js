@@ -21,14 +21,23 @@ module.exports = async function handler(req, res) {
       const order = await readJson(req);
       const error = validateOrder(order);
       if (error) return sendJson(res, 400, { error });
+      const row = {
+        id: order.id || `order_${Date.now()}`,
+        createdAt: order.createdAt || Date.now(),
+        name: order.name,
+        roomNo: order.roomNo,
+        phone: order.phone || "",
+        people: Number(order.people || 0),
+        note: order.note || "",
+        mealDate: order.mealDate,
+        mealPeriod: order.mealPeriod,
+        items: order.items,
+        total: Number(order.total || 0)
+      };
       await supabaseFetch(`/rest/v1/${TABLES.orders}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Prefer: "return=minimal" },
-        body: JSON.stringify({
-          ...order,
-          id: order.id || `order_${Date.now()}`,
-          createdAt: order.createdAt || Date.now()
-        })
+        body: JSON.stringify(row)
       });
       return sendJson(res, 201, await getPublicData());
     }

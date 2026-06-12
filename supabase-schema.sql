@@ -43,6 +43,8 @@ alter table public.orders
   add column if not exists "mealDate" text not null default '',
   add column if not exists "mealPeriod" text not null default '';
 
+notify pgrst, 'reload schema';
+
 alter table public.categories enable row level security;
 alter table public.dishes enable row level security;
 alter table public.orders enable row level security;
