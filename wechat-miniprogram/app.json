@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/menu/menu"
+  ],
+  "window": {
+    "navigationBarTitleText": "粤菜王府点菜",
+    "navigationBarBackgroundColor": "#0d8b72",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f7f4",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
