@@ -103,6 +103,15 @@
   text-align: center;
 }
 
+.side-tab text {
+  display: block;
+  width: 100%;
+  color: inherit;
+  line-height: 1.25;
+  white-space: normal;
+  word-break: break-all;
+}
+
 .side-tab.active {
   background: #0d8b72;
   color: #fff;
@@ -187,10 +196,14 @@
   background: #fff;
 }
 
-.qty button {
+.qty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 52rpx;
   color: #08614f;
   font-size: 30rpx;
+  font-weight: 800;
 }
 
 .qty text {

@@ -17,15 +17,15 @@
 
   <view class="menu-layout">
     <scroll-view class="side-tabs" scroll-y enhanced show-scrollbar="{{false}}">
-      <button
+      <view
         wx:for="{{categories}}"
         wx:key="id"
         class="side-tab {{activeCategory === item.id ? 'active' : ''}}"
         data-id="{{item.id}}"
         bindtap="onCategoryTap"
       >
-        {{item.name}}
-      </button>
+        <text>{{item.name}}</text>
+      </view>
     </scroll-view>
 
     <scroll-view class="dish-scroll" scroll-y enhanced show-scrollbar="{{false}}">
@@ -42,9 +42,9 @@
               <view class="price">￥{{item.priceText}}</view>
               <view wx:if="{{item.soldOut}}" class="sold-tag">售罄</view>
               <view wx:else class="qty">
-                <button data-id="{{item.id}}" data-delta="-1" bindtap="changeQty">-</button>
+                <view class="qty-btn" data-id="{{item.id}}" data-delta="-1" bindtap="changeQty">-</view>
                 <text>{{cart[item.id] || 0}}</text>
-                <button data-id="{{item.id}}" data-delta="1" bindtap="changeQty">+</button>
+                <view class="qty-btn" data-id="{{item.id}}" data-delta="1" bindtap="changeQty">+</view>
               </view>
             </view>
           </view>
