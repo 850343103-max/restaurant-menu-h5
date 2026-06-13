@@ -274,6 +274,11 @@
   font-size: 28rpx;
 }
 
+.cart-info:active {
+  transform: translateY(1rpx);
+  background: #f8fbf9;
+}
+
 .cart-total {
   color: #bf3b34;
   font-weight: 900;
