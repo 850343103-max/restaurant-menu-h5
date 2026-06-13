@@ -299,8 +299,37 @@
   border-radius: 18rpx;
   background: linear-gradient(135deg, #eaf7f3, #f8dfb8);
   color: #08614f;
-  font-size: 30rpx;
-  font-weight: 900;
+}
+
+.cart-basket {
+  position: relative;
+  width: 36rpx;
+  height: 26rpx;
+  border: 5rpx solid #08614f;
+  border-top: 0;
+  border-radius: 0 0 8rpx 8rpx;
+}
+
+.cart-basket::before {
+  content: "";
+  position: absolute;
+  left: 7rpx;
+  top: -14rpx;
+  width: 18rpx;
+  height: 14rpx;
+  border: 5rpx solid #08614f;
+  border-bottom: 0;
+  border-radius: 18rpx 18rpx 0 0;
+}
+
+.cart-basket::after {
+  content: "";
+  position: absolute;
+  left: 7rpx;
+  top: 7rpx;
+  width: 18rpx;
+  height: 5rpx;
+  border-top: 5rpx solid #08614f;
 }
 
 .cart-badge {

@@ -73,7 +73,9 @@
   <view class="cart-bar" wx:if="{{!showOrderPanel}}">
     <view class="cart-info" bindtap="openOrderPanel">
       <view class="cart-icon-wrap">
-        <view class="cart-icon">单</view>
+        <view class="cart-icon">
+          <view class="cart-basket"></view>
+        </view>
         <view wx:if="{{cartCount}}" class="cart-badge">{{cartCount}}</view>
       </view>
       <view class="cart-copy">
