@@ -119,19 +119,21 @@ Page({
         const sections = (result && result[1]) || [];
         if (!container || !sections.length) return;
         this.categoryOffsets = sections.map((section) => ({
-          id: section.dataset.id,
+          id: (section.dataset && section.dataset.id) || String(section.id || "").replace(/^section-/, ""),
           top: section.top - container.top
-        }));
+        })).filter((item) => item.id);
       });
   },
 
   onCategoryTap(event) {
     const id = event.currentTarget.dataset.id;
+    this.lockActiveCategoryUntil = Date.now() + 1000;
     this.setData({ activeCategory: id, scrollTarget: `section-${id}` });
   },
 
   onDishScroll(event) {
     if (!this.categoryOffsets || !this.categoryOffsets.length) return;
+    if (Date.now() < (this.lockActiveCategoryUntil || 0)) return;
     const scrollTop = event.detail.scrollTop || 0;
     let activeCategory = this.categoryOffsets[0].id;
     this.categoryOffsets.forEach((item) => {
