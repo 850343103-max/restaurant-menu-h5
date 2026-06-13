@@ -23,9 +23,10 @@ Page({
     restaurantEnName: app.globalData.restaurantEnName,
     logoText: app.globalData.logoText,
     categories: [],
+    groupedCategories: [],
     dishes: [],
-    visibleDishes: [],
     activeCategory: "",
+    scrollTarget: "",
     cart: {},
     cartItems: [],
     cartCount: 0,
@@ -88,20 +89,57 @@ Page({
       const activeCategory = categories.some((item) => item.id === this.data.activeCategory)
         ? this.data.activeCategory
         : (categories[0] ? categories[0].id : "");
-      this.setData({ categories, dishes, activeCategory, loading: false }, () => this.updateVisibleDishes());
+      const groupedCategories = this.buildGroups(categories, dishes);
+      this.setData({ categories, groupedCategories, dishes, activeCategory, loading: false }, () => {
+        this.measureCategoryOffsets();
+      });
     } catch (error) {
       this.setData({ loading: false });
       wx.showToast({ title: error.message, icon: "none" });
     }
   },
 
-  updateVisibleDishes() {
-    const visibleDishes = this.data.dishes.filter((dish) => dish.categoryId === this.data.activeCategory);
-    this.setData({ visibleDishes });
+  buildGroups(categories, dishes) {
+    return categories.map((category) => ({
+      ...category,
+      sectionId: `section-${category.id}`,
+      dishes: dishes.filter((dish) => dish.categoryId === category.id)
+    })).filter((category) => category.dishes.length);
+  },
+
+  measureCategoryOffsets() {
+    wx.createSelectorQuery()
+      .in(this)
+      .select(".dish-scroll")
+      .boundingClientRect()
+      .selectAll(".category-section")
+      .boundingClientRect()
+      .exec((result) => {
+        const container = result && result[0];
+        const sections = (result && result[1]) || [];
+        if (!container || !sections.length) return;
+        this.categoryOffsets = sections.map((section) => ({
+          id: section.dataset.id,
+          top: section.top - container.top
+        }));
+      });
   },
 
   onCategoryTap(event) {
-    this.setData({ activeCategory: event.currentTarget.dataset.id }, () => this.updateVisibleDishes());
+    const id = event.currentTarget.dataset.id;
+    this.setData({ activeCategory: id, scrollTarget: `section-${id}` });
+  },
+
+  onDishScroll(event) {
+    if (!this.categoryOffsets || !this.categoryOffsets.length) return;
+    const scrollTop = event.detail.scrollTop || 0;
+    let activeCategory = this.categoryOffsets[0].id;
+    this.categoryOffsets.forEach((item) => {
+      if (scrollTop + 24 >= item.top) activeCategory = item.id;
+    });
+    if (activeCategory && activeCategory !== this.data.activeCategory) {
+      this.setData({ activeCategory });
+    }
   },
 
   changeQty(event) {
@@ -240,7 +278,7 @@ Page({
         },
         mealPeriodIndex: 0
       });
-      this.updateVisibleDishes();
+      this.measureCategoryOffsets();
     } catch (err) {
       this.setData({ submitting: false });
       wx.showToast({ title: err.message, icon: "none" });

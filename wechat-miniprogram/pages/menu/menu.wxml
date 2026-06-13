@@ -28,23 +28,40 @@
       </view>
     </scroll-view>
 
-    <scroll-view class="dish-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <scroll-view
+      class="dish-scroll"
+      scroll-y
+      enhanced
+      show-scrollbar="{{false}}"
+      scroll-into-view="{{scrollTarget}}"
+      scroll-with-animation
+      bindscroll="onDishScroll"
+    >
       <view wx:if="{{loading}}" class="empty">菜品加载中...</view>
-      <view wx:elif="{{!visibleDishes.length}}" class="empty">暂无菜品，请联系酒店后台确认菜单。</view>
+      <view wx:elif="{{!groupedCategories.length}}" class="empty">暂无菜品，请联系酒店后台确认菜单。</view>
 
       <view class="dish-list" wx:else>
-        <view wx:for="{{visibleDishes}}" wx:key="id" class="dish-card {{item.soldOut ? 'sold' : ''}}">
-          <image class="dish-img" src="{{item.image || item.fallbackImage}}" mode="aspectFill" />
-          <view class="dish-main">
-            <view class="dish-title">{{item.name}}</view>
-            <view class="dish-desc">{{item.desc || '暂无介绍'}}</view>
-            <view class="dish-bottom">
-              <view class="price">￥{{item.priceText}}</view>
-              <view wx:if="{{item.soldOut}}" class="sold-tag">售罄</view>
-              <view wx:else class="qty">
-                <view class="qty-btn" data-id="{{item.id}}" data-delta="-1" bindtap="changeQty">-</view>
-                <text>{{cart[item.id] || 0}}</text>
-                <view class="qty-btn" data-id="{{item.id}}" data-delta="1" bindtap="changeQty">+</view>
+        <view
+          wx:for="{{groupedCategories}}"
+          wx:key="id"
+          id="{{item.sectionId}}"
+          data-id="{{item.id}}"
+          class="category-section"
+        >
+          <view class="section-title">{{item.name}}</view>
+          <view wx:for="{{item.dishes}}" wx:for-item="dish" wx:key="id" class="dish-card {{dish.soldOut ? 'sold' : ''}}">
+            <image class="dish-img" src="{{dish.image || dish.fallbackImage}}" mode="aspectFill" />
+            <view class="dish-main">
+              <view class="dish-title">{{dish.name}}</view>
+              <view class="dish-desc">{{dish.desc || '暂无介绍'}}</view>
+              <view class="dish-bottom">
+                <view class="price">￥{{dish.priceText}}</view>
+                <view wx:if="{{dish.soldOut}}" class="sold-tag">售罄</view>
+                <view wx:else class="qty">
+                  <view class="qty-btn" data-id="{{dish.id}}" data-delta="-1" bindtap="changeQty">-</view>
+                  <text>{{cart[dish.id] || 0}}</text>
+                  <view class="qty-btn" data-id="{{dish.id}}" data-delta="1" bindtap="changeQty">+</view>
+                </view>
               </view>
             </view>
           </view>
