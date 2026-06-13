@@ -69,42 +69,57 @@
   line-height: 1.5;
 }
 
-.tabs {
-  width: 100%;
-  white-space: nowrap;
-  margin-bottom: 18rpx;
+.menu-layout {
+  display: grid;
+  grid-template-columns: 152rpx 1fr;
+  gap: 14rpx;
+  height: calc(100vh - 360rpx);
+  min-height: 620rpx;
 }
 
-.tab {
-  display: inline-flex;
-  align-items: center;
-  height: 72rpx;
-  margin-right: 14rpx;
-  padding: 0 24rpx;
-  border: 1rpx solid #e3e7dd;
+.side-tabs,
+.dish-scroll {
+  height: 100%;
+}
+
+.side-tabs {
   border-radius: 14rpx;
-  background: #fff;
-  color: #73796e;
-  font-size: 28rpx;
+  background: rgba(255, 255, 255, .72);
+  overflow: hidden;
 }
 
-.tab.active {
-  border-color: #0d8b72;
+.side-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 82rpx;
+  padding: 18rpx 10rpx;
+  border-bottom: 1rpx solid #e3e7dd;
+  background: transparent;
+  color: #586158;
+  font-size: 26rpx;
+  font-weight: 700;
+  text-align: center;
+}
+
+.side-tab.active {
   background: #0d8b72;
   color: #fff;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .dish-list {
   display: grid;
-  gap: 18rpx;
+  gap: 14rpx;
+  padding-bottom: 20rpx;
 }
 
 .dish-card {
   display: grid;
-  grid-template-columns: 168rpx 1fr;
-  gap: 18rpx;
-  padding: 18rpx;
+  grid-template-columns: 132rpx 1fr;
+  gap: 14rpx;
+  padding: 14rpx;
   border: 1rpx solid #e3e7dd;
   border-radius: 14rpx;
   background: rgba(255, 255, 255, .96);
@@ -115,8 +130,8 @@
 }
 
 .dish-img {
-  width: 168rpx;
-  height: 168rpx;
+  width: 132rpx;
+  height: 132rpx;
   border-radius: 14rpx;
   background: linear-gradient(135deg, #d7eee4, #f4d8a9);
 }
@@ -129,14 +144,14 @@
 
 .dish-title {
   color: #121712;
-  font-size: 31rpx;
+  font-size: 29rpx;
   font-weight: 900;
 }
 
 .dish-desc {
   margin-top: 8rpx;
   color: #73796e;
-  font-size: 24rpx;
+  font-size: 22rpx;
   line-height: 1.45;
 }
 
@@ -151,7 +166,7 @@
 
 .price {
   color: #bf3b34;
-  font-size: 31rpx;
+  font-size: 29rpx;
   font-weight: 900;
 }
 
@@ -163,9 +178,9 @@
 
 .qty {
   display: grid;
-  grid-template-columns: 58rpx 60rpx 58rpx;
+  grid-template-columns: 48rpx 52rpx 48rpx;
   align-items: center;
-  height: 58rpx;
+  height: 52rpx;
   border: 1rpx solid #e3e7dd;
   border-radius: 12rpx;
   overflow: hidden;
@@ -173,15 +188,15 @@
 }
 
 .qty button {
-  height: 58rpx;
+  height: 52rpx;
   color: #08614f;
-  font-size: 34rpx;
+  font-size: 30rpx;
 }
 
 .qty text {
   text-align: center;
   color: #121712;
-  font-size: 28rpx;
+  font-size: 26rpx;
   font-weight: 800;
 }
 

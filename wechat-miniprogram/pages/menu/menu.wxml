@@ -15,38 +15,42 @@
     <view class="notice-text">菜品和订单与网页后台同步，提交后后台可查看和复制。</view>
   </view>
 
-  <scroll-view class="tabs" scroll-x enhanced show-scrollbar="{{false}}">
-    <button
-      wx:for="{{categories}}"
-      wx:key="id"
-      class="tab {{activeCategory === item.id ? 'active' : ''}}"
-      data-id="{{item.id}}"
-      bindtap="onCategoryTap"
-    >
-      {{item.name}}
-    </button>
-  </scroll-view>
+  <view class="menu-layout">
+    <scroll-view class="side-tabs" scroll-y enhanced show-scrollbar="{{false}}">
+      <button
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="side-tab {{activeCategory === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryTap"
+      >
+        {{item.name}}
+      </button>
+    </scroll-view>
 
-  <view wx:if="{{loading}}" class="empty">菜品加载中...</view>
-  <view wx:elif="{{!visibleDishes.length}}" class="empty">暂无菜品，请联系酒店后台确认菜单。</view>
+    <scroll-view class="dish-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+      <view wx:if="{{loading}}" class="empty">菜品加载中...</view>
+      <view wx:elif="{{!visibleDishes.length}}" class="empty">暂无菜品，请联系酒店后台确认菜单。</view>
 
-  <view class="dish-list" wx:else>
-    <view wx:for="{{visibleDishes}}" wx:key="id" class="dish-card {{item.soldOut ? 'sold' : ''}}">
-      <image class="dish-img" src="{{item.image || item.fallbackImage}}" mode="aspectFill" />
-      <view class="dish-main">
-        <view class="dish-title">{{item.name}}</view>
-        <view class="dish-desc">{{item.desc || '暂无介绍'}}</view>
-        <view class="dish-bottom">
-          <view class="price">￥{{item.priceText}}</view>
-          <view wx:if="{{item.soldOut}}" class="sold-tag">售罄</view>
-          <view wx:else class="qty">
-            <button data-id="{{item.id}}" data-delta="-1" bindtap="changeQty">-</button>
-            <text>{{cart[item.id] || 0}}</text>
-            <button data-id="{{item.id}}" data-delta="1" bindtap="changeQty">+</button>
+      <view class="dish-list" wx:else>
+        <view wx:for="{{visibleDishes}}" wx:key="id" class="dish-card {{item.soldOut ? 'sold' : ''}}">
+          <image class="dish-img" src="{{item.image || item.fallbackImage}}" mode="aspectFill" />
+          <view class="dish-main">
+            <view class="dish-title">{{item.name}}</view>
+            <view class="dish-desc">{{item.desc || '暂无介绍'}}</view>
+            <view class="dish-bottom">
+              <view class="price">￥{{item.priceText}}</view>
+              <view wx:if="{{item.soldOut}}" class="sold-tag">售罄</view>
+              <view wx:else class="qty">
+                <button data-id="{{item.id}}" data-delta="-1" bindtap="changeQty">-</button>
+                <text>{{cart[item.id] || 0}}</text>
+                <button data-id="{{item.id}}" data-delta="1" bindtap="changeQty">+</button>
+              </view>
+            </view>
           </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 
   <view class="cart-bar" wx:if="{{!showOrderPanel}}">
