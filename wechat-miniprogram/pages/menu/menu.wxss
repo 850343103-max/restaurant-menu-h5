@@ -74,7 +74,7 @@
   display: grid;
   grid-template-columns: 152rpx 1fr;
   gap: 14rpx;
-  height: calc(100vh - 360rpx);
+  height: calc(100vh - 330rpx);
   min-height: 620rpx;
   overflow: hidden;
 }
@@ -131,7 +131,7 @@
 .dish-list {
   display: grid;
   gap: 18rpx;
-  padding-bottom: 20rpx;
+  padding-bottom: 180rpx;
 }
 
 .category-section {
