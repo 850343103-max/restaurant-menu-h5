@@ -280,13 +280,18 @@
 }
 
 .cart-submit {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 86rpx;
+  padding: 0 18rpx;
   border-radius: 14rpx;
   background: #08614f;
   color: #fff;
   font-size: 30rpx;
   font-weight: 900;
+  line-height: 1;
+  text-align: center;
   box-shadow: 0 16rpx 40rpx rgba(25, 40, 31, .14);
 }
 
