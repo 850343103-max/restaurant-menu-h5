@@ -251,33 +251,38 @@
 
 .cart-bar {
   position: fixed;
-  left: 24rpx;
-  right: 24rpx;
-  bottom: calc(20rpx + env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: 1fr 220rpx;
-  gap: 14rpx;
+  grid-template-columns: 1fr 210rpx;
+  gap: 18rpx;
+  align-items: center;
+  min-height: 122rpx;
+  padding: 18rpx 28rpx calc(18rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #e3e7dd;
+  background: #fff;
+  box-shadow: 0 -10rpx 34rpx rgba(25, 40, 31, .1);
 }
 
 .cart-info {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 14rpx;
+  gap: 22rpx;
   min-width: 0;
-  padding: 14rpx 18rpx;
-  border: 1rpx solid rgba(8, 97, 79, .14);
-  border-radius: 14rpx;
-  background: #fff;
-  box-shadow: 0 16rpx 40rpx rgba(25, 40, 31, .14);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: #20231f;
   font-size: 28rpx;
 }
 
 .cart-info:active {
   transform: translateY(1rpx);
-  background: #f8fbf9;
 }
 
 .cart-icon-wrap {
@@ -289,12 +294,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  background: #08614f;
-  color: #fff;
-  font-size: 26rpx;
+  width: 78rpx;
+  height: 78rpx;
+  border-radius: 18rpx;
+  background: linear-gradient(135deg, #eaf7f3, #f8dfb8);
+  color: #08614f;
+  font-size: 30rpx;
   font-weight: 900;
 }
 
@@ -317,45 +322,51 @@
 .cart-copy {
   min-width: 0;
   display: grid;
-  gap: 3rpx;
+  gap: 6rpx;
+}
+
+.cart-total-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4rpx;
 }
 
 .cart-label {
   color: #20231f;
-  font-size: 26rpx;
+  font-size: 31rpx;
   font-weight: 800;
 }
 
 .cart-hint {
   color: #73796e;
-  font-size: 21rpx;
+  font-size: 24rpx;
 }
 
 .cart-total {
-  margin-left: auto;
   color: #bf3b34;
   font-weight: 900;
-  font-size: 30rpx;
+  font-size: 42rpx;
+  line-height: 1;
 }
 
 .cart-submit {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 86rpx;
+  min-height: 84rpx;
   padding: 0 18rpx;
-  border-radius: 14rpx;
-  background: #08614f;
+  border-radius: 18rpx;
+  background: #ddb075;
   color: #fff;
-  font-size: 30rpx;
+  font-size: 34rpx;
   font-weight: 900;
   line-height: 1;
   text-align: center;
-  box-shadow: 0 16rpx 40rpx rgba(25, 40, 31, .14);
+  box-shadow: none;
 }
 
 .cart-submit.disabled {
-  background: #7b8580;
+  background: #b9c0ba;
 }
 
 .panel-mask {
