@@ -72,7 +72,14 @@
 
   <view class="cart-bar" wx:if="{{!showOrderPanel}}">
     <view class="cart-info" bindtap="openOrderPanel">
-      <text>已选 {{cartCount}} 份</text>
+      <view class="cart-icon-wrap">
+        <view class="cart-icon">购</view>
+        <view wx:if="{{cartCount}}" class="cart-badge">{{cartCount}}</view>
+      </view>
+      <view class="cart-copy">
+        <text class="cart-label">已选 {{cartCount}} 份</text>
+        <text class="cart-hint">查看购物车</text>
+      </view>
       <text class="cart-total">￥{{cartTotal}}</text>
     </view>
     <button class="cart-submit {{cartCount ? '' : 'disabled'}}" bindtap="openOrderPanel">
